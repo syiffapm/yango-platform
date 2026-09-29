@@ -30,9 +30,25 @@ Run any portal locally the same way:
 VITE_PORTAL=citizen npm run dev    # citizen | driver | operator | authority | board
 ```
 
-Long-lived branches that only differ by a build flag are not version control — they are copies that
-can never be merged back. Keeping the difference in deployment configuration leaves git doing the
-job it is for.
+### Branches are release pointers, not code variants
+
+Each portal has a branch — `citizen`, `driver`, `operator`, `authority`, `board`, `hub` — and every
+one of them holds **exactly the same code as `main`**. They carry no diff at all, so they can never
+drift apart and a merge is always a fast-forward.
+
+What they give you is an independent release train per portal: move `citizen` to today's commit
+while `authority` stays on last week's, and each Vercel project deploys its own branch.
+
+```bash
+# ship one portal
+git push origin main:citizen
+
+# ship everything
+git push origin main:citizen main:driver main:operator main:authority main:board main:hub
+```
+
+If a branch ever shows a diff against `main`, something has gone wrong — the portal difference
+belongs in `VITE_PORTAL`, not in the source.
 
 ## Running it
 
