@@ -10,13 +10,17 @@ export const PORTAL = import.meta.env.VITE_PORTAL || null
 export const HUB_URL = import.meta.env.VITE_HUB_URL || 'https://yango-platform.vercel.app'
 export const isSinglePortal = !!PORTAL
 
+/** 'cms' and the older 'authority' are the same console. */
+export const canonicalPortal = (p) => (p === 'authority' ? 'cms' : p)
+
 export const PORTAL_ROOT = {
   citizen: '/citizen',
   driver: '/driver',
   operator: '/operator',
   licensing: '/licensing',
-  authority: '/authority',
-  terminal: '/authority',
+  cms: '/cms',
+  authority: '/cms',
+  terminal: '/cms',
   // The public hall display is its own deployment: one screen, no sign-in.
   board: '/board/T01',
 }

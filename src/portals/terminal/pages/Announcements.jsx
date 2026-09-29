@@ -120,7 +120,7 @@ export default function Announcements() {
       />
 
       <p className="text-[12px] text-ink-400 mt-3">
-        Approval happens in the Authority Console under Ads &amp; content. Safety messages always reach passengers even
+        Approval happens in the CMS Ministry under Ads &amp; content. Safety messages always reach passengers even
         if they have turned other notifications off.
       </p>
 

@@ -116,103 +116,103 @@ export default function AuthorityConsole() {
     {
       label: 'Operations',
       items: [
-        { to: '/authority/command', icon: Activity, label: 'Command center', end: true },
-        { to: '/authority/incidents', icon: ShieldAlert, label: 'Incidents', badge: open.length },
-        { to: '/authority/sos', icon: Siren, label: 'SOS live board', badge: sos.length },
-        { to: '/authority/compliance', icon: BadgeCheck, label: 'Compliance', badge: disputes },
-        { to: '/authority/enforcement', icon: Gavel, label: 'Enforcement' },
+        { to: '/cms/command', icon: Activity, label: 'Command center', end: true },
+        { to: '/cms/incidents', icon: ShieldAlert, label: 'Incidents', badge: open.length },
+        { to: '/cms/sos', icon: Siren, label: 'SOS live board', badge: sos.length },
+        { to: '/cms/compliance', icon: BadgeCheck, label: 'Compliance', badge: disputes },
+        { to: '/cms/enforcement', icon: Gavel, label: 'Enforcement' },
       ],
     },
     {
       label: 'Insight',
       items: [
-        { to: '/authority/analytics', icon: BarChart3, label: 'Analytics' },
-        { to: '/authority/planning', icon: Globe2, label: 'Planning' },
-        { to: '/authority/reports', icon: FileBarChart, label: 'Reports' },
-        { to: '/authority/national', icon: LayoutDashboard, label: 'National dashboard' },
-        { to: '/authority/regional', icon: MapPinned, label: 'Regional dashboard' },
-        { to: '/authority/ai', icon: Sparkles, label: 'AI & automation' },
+        { to: '/cms/analytics', icon: BarChart3, label: 'Analytics' },
+        { to: '/cms/planning', icon: Globe2, label: 'Planning' },
+        { to: '/cms/reports', icon: FileBarChart, label: 'Reports' },
+        { to: '/cms/national', icon: LayoutDashboard, label: 'National dashboard' },
+        { to: '/cms/regional', icon: MapPinned, label: 'Regional dashboard' },
+        { to: '/cms/ai', icon: Sparkles, label: 'AI & automation' },
       ],
     },
     {
       label: 'Licensing & money',
       items: [
-        { to: '/authority/licensing', icon: ClipboardList, label: 'Licensing overview', badge: pendingApps },
-        { to: '/authority/licensing/queue', icon: Inbox, label: 'Approval work queue', badge: pendingApps },
-        { to: '/authority/licensing/inspections', icon: Wrench, label: 'Inspections' },
-        { to: '/authority/licensing/register', icon: BadgeCheck, label: 'Licence register' },
-        { to: '/authority/licensing/fees', icon: Coins, label: 'Fee schedule' },
-        { to: '/authority/licensing/reports', icon: FileBarChart, label: 'Licensing reports' },
-        { to: '/authority/permits', icon: ScrollText, label: 'Permit register' },
-        { to: '/authority/revenue', icon: Banknote, label: 'Regulated revenue' },
-        { to: '/authority/settlement', icon: Landmark, label: 'Settlement oversight' },
+        { to: '/cms/licensing', icon: ClipboardList, label: 'Licensing overview', badge: pendingApps },
+        { to: '/cms/licensing/queue', icon: Inbox, label: 'Approval work queue', badge: pendingApps },
+        { to: '/cms/licensing/inspections', icon: Wrench, label: 'Inspections' },
+        { to: '/cms/licensing/register', icon: BadgeCheck, label: 'Licence register' },
+        { to: '/cms/licensing/fees', icon: Coins, label: 'Fee schedule' },
+        { to: '/cms/licensing/reports', icon: FileBarChart, label: 'Licensing reports' },
+        { to: '/cms/permits', icon: ScrollText, label: 'Permit register' },
+        { to: '/cms/revenue', icon: Banknote, label: 'Regulated revenue' },
+        { to: '/cms/settlement', icon: Landmark, label: 'Settlement oversight' },
       ],
     },
     {
       label: 'Registries',
       items: [
-        { to: '/authority/registries', icon: Building2, label: 'Operators, fleet & drivers' },
-        { to: '/authority/fares', icon: Coins, label: 'Fare bands', locked: !can.fareBands },
+        { to: '/cms/registries', icon: Building2, label: 'Operators, fleet & drivers' },
+        { to: '/cms/fares', icon: Coins, label: 'Fare bands', locked: !can.fareBands },
       ],
     },
     can.terminal && {
       label: 'Terminals',
       items: [
-        { to: '/authority/terminals', icon: Building2, label: 'Terminal overview' },
-        { to: '/authority/bays', icon: MonitorSpeaker, label: 'Bay allocation' },
-        { to: '/authority/board', icon: Radio, label: 'Departure board' },
-        { to: '/authority/gate', icon: ScanLine, label: 'Gate check-in' },
-        { to: '/authority/crowd', icon: Users, label: 'Crowd monitor' },
+        { to: '/cms/terminals', icon: Building2, label: 'Terminal overview' },
+        { to: '/cms/bays', icon: MonitorSpeaker, label: 'Bay allocation' },
+        { to: '/cms/board', icon: Radio, label: 'Departure board' },
+        { to: '/cms/gate', icon: ScanLine, label: 'Gate check-in' },
+        { to: '/cms/crowd', icon: Users, label: 'Crowd monitor' },
       ],
     },
     {
       label: 'CMS · Content & messaging',
       items: [
-        { to: '/authority/cms', icon: LayoutTemplate, label: 'CMS overview' },
-        { to: '/authority/approvals', icon: Megaphone, label: 'Ads & content approval', badge: pendingAds },
+        { to: '/cms/cms', icon: LayoutTemplate, label: 'CMS overview' },
+        { to: '/cms/approvals', icon: Megaphone, label: 'Ads & content approval', badge: pendingAds },
         ...(can.content
           ? [
-              { to: '/authority/announcements', icon: FileText, label: 'Announcements & alerts', badge: draftContent },
-              { to: '/authority/knowledge', icon: BookOpen, label: 'FAQs & legal pages' },
-              { to: '/authority/layout', icon: LayoutTemplate, label: 'App home layout' },
+              { to: '/cms/announcements', icon: FileText, label: 'Announcements & alerts', badge: draftContent },
+              { to: '/cms/knowledge', icon: BookOpen, label: 'FAQs & legal pages' },
+              { to: '/cms/layout', icon: LayoutTemplate, label: 'App home layout' },
             ]
           : []),
         ...(can.notify
           ? [
-              { to: '/authority/templates', icon: Bell, label: 'Notification templates' },
-              ...(can.broadcast ? [{ to: '/authority/broadcasts', icon: Megaphone, label: 'Broadcasts' }] : []),
-              { to: '/authority/delivery', icon: Server, label: 'Delivery logs' },
+              { to: '/cms/templates', icon: Bell, label: 'Notification templates' },
+              ...(can.broadcast ? [{ to: '/cms/broadcasts', icon: Megaphone, label: 'Broadcasts' }] : []),
+              { to: '/cms/delivery', icon: Server, label: 'Delivery logs' },
             ]
           : []),
-        { to: '/authority/complaints', icon: LifeBuoy, label: 'Complaints' },
-        ...(can.helpdesk ? [{ to: '/authority/helpdesk', icon: LifeBuoy, label: 'Helpdesk' }] : []),
+        { to: '/cms/complaints', icon: LifeBuoy, label: 'Complaints' },
+        ...(can.helpdesk ? [{ to: '/cms/helpdesk', icon: LifeBuoy, label: 'Helpdesk' }] : []),
       ],
     },
     can.ads && {
       label: 'CMS · Advertising',
       items: [
-        { to: '/authority/ads/inventory', icon: Megaphone, label: 'Inventory & rate card' },
-        { to: '/authority/ads/campaigns', icon: Megaphone, label: 'Campaigns' },
-        { to: '/authority/ads/advertisers', icon: Users, label: 'Advertiser accounts' },
-        { to: '/authority/ads/billing', icon: Coins, label: 'Billing & revenue split' },
+        { to: '/cms/ads/inventory', icon: Megaphone, label: 'Inventory & rate card' },
+        { to: '/cms/ads/campaigns', icon: Megaphone, label: 'Campaigns' },
+        { to: '/cms/ads/advertisers', icon: Users, label: 'Advertiser accounts' },
+        { to: '/cms/ads/billing', icon: Coins, label: 'Billing & revenue split' },
       ],
     },
     {
       label: 'Administration',
       items: [
-        { to: '/authority/accounts', icon: Users, label: 'Accounts' },
-        { to: '/authority/permissions', icon: SlidersHorizontal, label: 'Permissions' },
-        { to: '/authority/thresholds', icon: Gauge, label: 'Thresholds & policy' },
-        { to: '/authority/integrations', icon: Plug, label: 'Integration monitor' },
-        { to: '/authority/audit', icon: FileText, label: 'Audit log' },
-        ...(can.platform ? [{ to: '/authority/platform', icon: Settings2, label: 'Platform admin' }] : []),
+        { to: '/cms/accounts', icon: Users, label: 'Accounts' },
+        { to: '/cms/permissions', icon: SlidersHorizontal, label: 'Permissions' },
+        { to: '/cms/thresholds', icon: Gauge, label: 'Thresholds & policy' },
+        { to: '/cms/integrations', icon: Plug, label: 'Integration monitor' },
+        { to: '/cms/audit', icon: FileText, label: 'Audit log' },
+        ...(can.platform ? [{ to: '/cms/platform', icon: Settings2, label: 'Platform admin' }] : []),
       ],
     },
   ].filter(Boolean)
   return (
     <PortalShell
       portal={{
-        name: 'Authority Console',
+        name: 'CMS Ministry',
         tagline: ses.jurisdiction === 'NATIONAL' ? 'Ministry of Transport' : 'Yangon Region Transport Committee',
       }}
       nav={nav}
@@ -337,7 +337,7 @@ export default function AuthorityConsole() {
         <Route path="delivery" element={<DeliveryLogs />} />
         <Route path="helpdesk" element={<Helpdesk />} />
         <Route path="platform" element={<PlatformAdmin />} />
-        <Route path="*" element={<Navigate to="/authority/command" replace />} />
+        <Route path="*" element={<Navigate to="/cms/command" replace />} />
       </Routes>
     </PortalShell>
   )

@@ -23,7 +23,7 @@ export default function AdCampaigns() {
         title="Campaigns"
         subtitle="Bookings with contextual targeting and aggregate delivery reporting. Creative approval sits with the authority."
         actions={
-          <Button icon={ExternalLink} as={Link} to="/authority/approvals">
+          <Button icon={ExternalLink} as={Link} to="/cms/approvals">
             Open approval queue
           </Button>
         }

@@ -27,7 +27,7 @@ export const backendServices = [
     domain: 'Identity',
     service: 'Tenant & jurisdiction',
     responsibility: 'National → region → city → terminal → operator',
-    consumers: 'Authority Console, platform admin',
+    consumers: 'CMS Ministry, platform admin',
   },
   {
     n: 5,
@@ -350,14 +350,14 @@ export const pageInventory = [
       'Work queue, application detail, verification checklist, inspection scheduling and result, approve/reject, fee schedule, licence register, verification admin, reports, public verification page',
   },
   {
-    channel: 'Authority Console',
+    channel: 'CMS Ministry',
     group: 'Existing screens',
     count: 13,
     scope:
       'Command center, incidents list and detail, compliance matrix and finding detail, analytics, planning, reports, accounts and roles, permit register, thresholds, audit log, permissions',
   },
   {
-    channel: 'Authority Console',
+    channel: 'CMS Ministry',
     group: 'New screens',
     count: 17,
     scope:

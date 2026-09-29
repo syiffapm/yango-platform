@@ -66,7 +66,7 @@ export default function RegionalDashboard() {
           </>
         }
         actions={
-          <Button as={Link} to="/authority/national" icon={Activity}>
+          <Button as={Link} to="/cms/national" icon={Activity}>
             National view
           </Button>
         }

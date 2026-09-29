@@ -5,7 +5,7 @@ import { HUB_URL } from '../../lib/portal.js'
  * The Licensing Portal was a channel of its own until licensing was put back
  * where it belongs: a bus company applies for its own licences from the
  * Operator Portal, and the transport authority verifies and approves from the
- * Authority Console. This page keeps the old link working and says where each
+ * CMS Ministry. This page keeps the old link working and says where each
  * side went.
  */
 const SIDES = [
@@ -17,10 +17,10 @@ const SIDES = [
     desc: 'Apply for a licence, attach documents, pay the invoice, track the application, hold your permits and file an appeal — alongside the fleet those licences cover.',
   },
   {
-    href: 'https://yango-authority.vercel.app/authority/licensing/queue',
+    href: 'https://yango-authority.vercel.app/cms/licensing/queue',
     icon: Gauge,
     who: 'If you are a transport officer',
-    what: 'Authority Console',
+    what: 'CMS Ministry',
     desc: 'Work queue, verification checklist, inspections, approval with maker–checker separation, the licence register, the fee schedule and licensing reports.',
   },
 ]

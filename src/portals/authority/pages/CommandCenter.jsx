@@ -68,10 +68,10 @@ export default function CommandCenter() {
         }
         actions={
           <>
-            <Button as={Link} to="/authority/sos" variant="danger" icon={Siren}>
+            <Button as={Link} to="/cms/sos" variant="danger" icon={Siren}>
               {tx('SOS board')} ({sos.length})
             </Button>
-            <Button as={Link} to="/authority/reports" icon={ScrollText}>
+            <Button as={Link} to="/cms/reports" icon={ScrollText}>
               Build report
             </Button>
           </>
@@ -159,7 +159,7 @@ export default function CommandCenter() {
                     {open[0].location} · {relative(open[0].reportedAt)} · owner{' '}
                     {db.users.find((u) => u.id === open[0].owner)?.name || 'unassigned'}
                   </p>
-                  <Button size="sm" variant="primary" className="mt-3" as={Link} to="/authority/incidents">
+                  <Button size="sm" variant="primary" className="mt-3" as={Link} to="/cms/incidents">
                     Open incident queue
                   </Button>
                 </>
@@ -202,7 +202,7 @@ export default function CommandCenter() {
             title="Open incident queue"
             subtitle="Next acknowledgement deadline"
             action={
-              <Button size="xs" as={Link} to="/authority/incidents">
+              <Button size="xs" as={Link} to="/cms/incidents">
                 All
               </Button>
             }

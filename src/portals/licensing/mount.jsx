@@ -5,7 +5,7 @@ import { useSession } from '../../lib/session.jsx'
 /**
  * Licensing has two sides and they now live in two different consoles: a bus
  * company applies from the Operator Portal, and the transport authority
- * verifies and approves from the Authority Console. The screens are the same
+ * verifies and approves from the CMS Ministry. The screens are the same
  * screens; only the side changes, so each console pins the side when it mounts
  * one instead of offering a role switch nobody should have.
  */
@@ -37,5 +37,5 @@ export function AsOfficer({ children }) {
  */
 export function useLicensingBase() {
   const { pathname } = useLocation()
-  return pathname.startsWith('/authority') ? '/authority/licensing' : '/operator/licensing'
+  return pathname.startsWith('/cms') ? '/cms/licensing' : '/operator/licensing'
 }

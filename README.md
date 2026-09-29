@@ -21,7 +21,7 @@ different single-portal bundle per project.
 | Citizen App | `citizen` | Passengers | https://yango-citizen.vercel.app |
 | Driver App | `driver` | Bus drivers and crew | https://yango-driver.vercel.app |
 | Bus Operator Portal | `operator` | Licensed bus companies, including their licence applications | https://yango-operator.vercel.app |
-| Authority Console | `authority` | YRTC, the ministry and auditors — including licence approval and the CMS | https://yango-authority.vercel.app |
+| CMS Ministry | `authority` | The ministry and YRTC — live network, licence approval, terminals and the CMS | https://yango-authority.vercel.app/cms |
 | Public departure board | `board` | Terminal hall displays | https://yango-terminal.vercel.app |
 
 Run any portal locally the same way:
@@ -32,7 +32,7 @@ VITE_PORTAL=citizen npm run dev    # citizen | driver | operator | authority | b
 
 ### Branches are release pointers, not code variants
 
-Each portal has a branch — `citizen`, `driver`, `operator`, `authority`, `board`, `hub` — and every
+Each portal has a branch — `citizen`, `driver`, `operator`, `cms`, `board`, `hub` — and every
 one of them holds **exactly the same code as `main`**. They carry no diff at all, so they can never
 drift apart and a merge is always a fast-forward.
 
@@ -44,7 +44,7 @@ while `authority` stays on last week's, and each Vercel project deploys its own 
 git push origin main:citizen
 
 # ship everything
-git push origin main:citizen main:driver main:operator main:authority main:board main:hub
+git push origin main:citizen main:driver main:operator main:cms main:board main:hub
 ```
 
 If a branch ever shows a diff against `main`, something has gone wrong — the portal difference
@@ -72,7 +72,7 @@ VITE_PORTAL=citizen npm run dev    # citizen | driver | operator | licensing | a
 | Citizen App | 26 | Search → line → departure → seat → passenger → pay → e-ticket → check-in → live trip |
 | Driver App | 14 | Shift check-in with face match and bus QR, manifest, inspection, fatigue, SOS |
 | Bus Operator Portal | 34 | Fleet, drivers, roster, schedules, fares, boarding, refunds, settlement, compliance — and the company's own licence applications, renewals and invoices |
-| Authority Console | 49 | Command centre, incidents, SOS, compliance, licence approval with maker–checker, terminals, CMS (content, messaging, advertising), admin |
+| CMS Ministry | 49 | Command centre, incidents, SOS, compliance, licence approval with maker–checker, terminals, CMS (content, messaging, advertising), admin — served at `/cms` |
 | Public pages | 3 | Departure board, permit verification, solution blueprint |
 
 ## Data

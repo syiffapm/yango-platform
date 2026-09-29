@@ -61,10 +61,10 @@ const PORTALS = [
     ],
   },
   {
-    to: '/authority',
-    name: 'Government Console',
-    code: 'Authority · CMS · Terminals',
-    desc: 'One console for the transport authority: live network, incidents and SOS, compliance, analytics, revenue, terminals, passenger information, advertising and platform administration.',
+    to: '/cms',
+    name: 'CMS Ministry',
+    code: 'Ministry · CMS · Terminals',
+    desc: 'One console for the ministry and the regional committee: live network, incidents and SOS, compliance, licence approval, revenue, terminals, the CMS for passenger information and advertising, and platform administration.',
     icon: Gauge,
     accent: 'from-violet-600 to-violet-800',
     highlights: [
@@ -112,7 +112,7 @@ export default function Hub() {
           <p className="text-[13.5px] text-ink-600 mt-2.5 max-w-3xl leading-relaxed">
             Six portals, one set of master data. What an operator files once in Licensing becomes the permit the
             Operator Portal plans against, the shift the Driver App can start, the bus the Citizen App can sell a seat
-            on, and the line the Authority Console measures. Every portal below has its own link and works end to end on
+            on, and the line the CMS Ministry measures. Every portal below has its own link and works end to end on
             the same shared demo database.
           </p>
 

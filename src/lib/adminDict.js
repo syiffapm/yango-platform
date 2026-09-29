@@ -53,7 +53,7 @@ export const ADMIN_MM = {
   'Command center': 'ကွပ်ကဲရေးစင်တာ',
   'Live operations': 'တိုက်ရိုက်လည်ပတ်မှု',
   'Bus Operator Portal': 'ဘတ်စ်ကားကုမ္ပဏီပေါ်တယ်',
-  'Authority Console': 'အာဏာပိုင်ကွန်ဆိုး',
+  'CMS Ministry': 'CMS ဝန်ကြီးဌာန',
   'Licensing Portal': 'လိုင်စင်ပေါ်တယ်',
   'Back office': 'ရုံးတွင်းလုပ်ငန်း',
 
