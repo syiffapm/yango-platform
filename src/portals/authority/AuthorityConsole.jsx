@@ -49,6 +49,7 @@ import LicensingOverview from './pages/LicensingOverview.jsx'
 import Revenue from './pages/Revenue.jsx'
 import Settlement from './pages/Settlement.jsx'
 import Registries from './pages/Registries.jsx'
+import CmsOverview from '../terminal/pages/CmsDashboard.jsx'
 import Enforcement from './pages/Enforcement.jsx'
 import NationalDashboard from './pages/NationalDashboard.jsx'
 import RegionalDashboard from './pages/RegionalDashboard.jsx'
@@ -151,8 +152,9 @@ export default function AuthorityConsole() {
       ],
     },
     {
-      label: 'Public information',
+      label: 'CMS · Content & messaging',
       items: [
+        { to: '/authority/cms', icon: LayoutTemplate, label: 'CMS overview' },
         { to: '/authority/approvals', icon: Megaphone, label: 'Ads & content approval', badge: pendingAds },
         ...(can.content
           ? [
@@ -173,7 +175,7 @@ export default function AuthorityConsole() {
       ],
     },
     can.ads && {
-      label: 'Advertising revenue',
+      label: 'CMS · Advertising',
       items: [
         { to: '/authority/ads/inventory', icon: Megaphone, label: 'Inventory & rate card' },
         { to: '/authority/ads/campaigns', icon: Megaphone, label: 'Campaigns' },
@@ -246,6 +248,7 @@ export default function AuthorityConsole() {
         <Route path="revenue" element={<Revenue />} />
         <Route path="settlement" element={<Settlement />} />
         <Route path="registries" element={<Registries />} />
+        <Route path="cms" element={<CmsOverview />} />
         <Route path="approvals" element={<Approvals />} />
         <Route path="complaints" element={<Complaints />} />
         <Route path="accounts" element={<Accounts />} />

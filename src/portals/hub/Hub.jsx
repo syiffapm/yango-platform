@@ -88,7 +88,7 @@ const PORTALS = [
       'Compliance matrix',
       'Fare bands',
       'Terminals & gate',
-      'Content & ads',
+      'CMS: content & ads',
     ],
   },
 ]

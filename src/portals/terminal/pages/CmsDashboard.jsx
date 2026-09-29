@@ -58,7 +58,7 @@ export default function CmsDashboard() {
   return (
     <>
       <PageHeader
-        title="Central admin dashboard"
+        title="CMS overview"
         subtitle="What the transport authority needs to watch day to day: service on the road, safety, licences, terminals and fare policy — plus the content and advertising this office publishes. Scoped to what your role may see."
         meta={
           <>
