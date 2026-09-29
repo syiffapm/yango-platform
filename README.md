@@ -9,33 +9,30 @@ can sell a seat on, and the line the Authority Console measures. Nothing is re-k
 
 ---
 
-## One repository, one branch per portal
+## One branch, one deployment per portal
 
-`main` holds the whole platform and builds the combined hub. Each portal has a branch that is
-`main` plus a single pinned build variable, so it deploys on its own URL without a second copy of
-the source.
+There is one branch: `main`. Which portal a build serves is decided at **deploy time**, not in git —
+each Vercel project sets `VITE_PORTAL` in its own environment, so the same commit produces a
+different single-portal bundle per project.
 
-| Branch | Portal | For | Live |
+| Portal | `VITE_PORTAL` | For | Live |
 |---|---|---|---|
-| `main` | All portals behind one hub | Demo and review | https://yango-platform.vercel.app |
-| `citizen` | Citizen App | Passengers | https://yango-citizen.vercel.app |
-| `driver` | Driver App | Bus drivers and crew | https://yango-driver.vercel.app |
-| `operator` | Bus Operator Portal | Licensed bus companies | https://yango-operator.vercel.app |
-| `licensing` | Licensing Portal | Applicants and licensing officers | https://yango-licensing.vercel.app |
-| `authority` | Authority Console | YRTC, the ministry and auditors | https://yango-authority.vercel.app |
-| `board` | Public departure board | Terminal hall displays | https://yango-terminal.vercel.app |
+| All portals behind one hub | *(unset)* | Demo and review | https://yango-platform.vercel.app |
+| Citizen App | `citizen` | Passengers | https://yango-citizen.vercel.app |
+| Driver App | `driver` | Bus drivers and crew | https://yango-driver.vercel.app |
+| Bus Operator Portal | `operator` | Licensed bus companies, including their licence applications | https://yango-operator.vercel.app |
+| Authority Console | `authority` | YRTC, the ministry and auditors — including licence approval and the CMS | https://yango-authority.vercel.app |
+| Public departure board | `board` | Terminal hall displays | https://yango-terminal.vercel.app |
 
-**Work on `main`.** To carry a change into the portals:
+Run any portal locally the same way:
 
 ```bash
-for b in citizen driver operator licensing authority board; do
-  git checkout $b && git merge main --no-edit
-done
-git checkout main
+VITE_PORTAL=citizen npm run dev    # citizen | driver | operator | authority | board
 ```
 
-A portal branch differs from `main` only in the `dev` and `build` scripts in `package.json`
-(`VITE_PORTAL=<portal>`) and in this README, so those merges stay clean.
+Long-lived branches that only differ by a build flag are not version control — they are copies that
+can never be merged back. Keeping the difference in deployment configuration leaves git doing the
+job it is for.
 
 ## Running it
 
@@ -58,9 +55,8 @@ VITE_PORTAL=citizen npm run dev    # citizen | driver | operator | licensing | a
 |---|---|---|
 | Citizen App | 26 | Search → line → departure → seat → passenger → pay → e-ticket → check-in → live trip |
 | Driver App | 14 | Shift check-in with face match and bus QR, manifest, inspection, fatigue, SOS |
-| Bus Operator Portal | 26 | Fleet, drivers, roster, schedules, fares, boarding, refunds, settlement, compliance |
-| Licensing Portal | 15 | Application wizard, invoice, verification, inspection, approval with maker–checker |
-| Authority Console | 42 | Command centre, incidents, SOS, compliance, licensing oversight, terminals, content, ads, admin |
+| Bus Operator Portal | 34 | Fleet, drivers, roster, schedules, fares, boarding, refunds, settlement, compliance — and the company's own licence applications, renewals and invoices |
+| Authority Console | 49 | Command centre, incidents, SOS, compliance, licence approval with maker–checker, terminals, CMS (content, messaging, advertising), admin |
 | Public pages | 3 | Departure board, permit verification, solution blueprint |
 
 ## Data

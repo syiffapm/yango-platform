@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { useLicensingBase } from '../mount.jsx'
 import { Receipt } from 'lucide-react'
 import { PageHeader } from '../../../components/layout/PortalShell.jsx'
 import DataTable from '../../../components/ui/Table.jsx'
@@ -9,6 +10,7 @@ import { useDb } from '../../../lib/store.jsx'
 import { useSession } from '../../../lib/session.jsx'
 import { MMK, dt } from '../../../lib/format.js'
 export default function Invoices() {
+  const licBase = useLicensingBase()
   const { db } = useDb()
   const [ses] = useSession('licensing')
   const rows = db.invoices.filter((i) => i.party === ses.operator)
@@ -51,7 +53,7 @@ export default function Invoices() {
             align: 'right',
             render: (r) =>
               r.status === 'unpaid' && r.kind === 'licence' ? (
-                <Button size="xs" variant="primary" as={Link} to={`/licensing/application/${r.ref}`}>
+                <Button size="xs" variant="primary" as={Link} to={`${licBase}/application/${r.ref}`}>
                   Pay
                 </Button>
               ) : null,

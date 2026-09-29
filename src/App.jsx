@@ -4,17 +4,16 @@ import Hub from './portals/hub/Hub.jsx'
 import Verify from './portals/hub/Verify.jsx'
 import Blueprint from './portals/hub/Blueprint.jsx'
 import DepartureBoard from './portals/terminal/DepartureBoard.jsx'
+import LicensingMoved from './portals/hub/LicensingMoved.jsx'
 import { PORTAL, portalHome } from './lib/portal.js'
 const CitizenApp = lazy(() => import('./portals/citizen/CitizenApp.jsx'))
 const DriverApp = lazy(() => import('./portals/driver/DriverApp.jsx'))
 const OperatorPortal = lazy(() => import('./portals/operator/OperatorPortal.jsx'))
-const LicensingPortal = lazy(() => import('./portals/licensing/LicensingPortal.jsx'))
 const AuthorityConsole = lazy(() => import('./portals/authority/AuthorityConsole.jsx'))
 const PORTALS = {
   citizen: { path: '/citizen/*', element: <CitizenApp /> },
   driver: { path: '/driver/*', element: <DriverApp /> },
   operator: { path: '/operator/*', element: <OperatorPortal /> },
-  licensing: { path: '/licensing/*', element: <LicensingPortal /> },
   authority: { path: '/authority/*', element: <AuthorityConsole /> },
 }
 function Loading() {
@@ -31,6 +30,9 @@ function Loading() {
 }
 export default function App() {
   const only = PORTAL && PORTALS[PORTAL] ? PORTALS[PORTAL] : null
+  // The old Licensing deployment now only says where the two sides went.
+  if (PORTAL === 'licensing') return <LicensingMoved />
+
   // A departure-board deployment carries nothing but the board itself.
   if (PORTAL === 'board')
     return (
@@ -49,6 +51,20 @@ export default function App() {
         <Route path="/board/:terminalId" element={<DepartureBoard public />} />
         {/* the content and terminal back office now lives inside the Authority Console */}
         <Route path="/terminal/*" element={<Navigate to="/authority/terminals" replace />} />
+        {/* licensing split in two: the company applies, the authority approves */}
+        <Route path="/licensing/queue" element={<Navigate to="/authority/licensing/queue" replace />} />
+        <Route path="/licensing/inspections" element={<Navigate to="/authority/licensing/inspections" replace />} />
+        <Route path="/licensing/register" element={<Navigate to="/authority/licensing/register" replace />} />
+        <Route path="/licensing/fees" element={<Navigate to="/authority/licensing/fees" replace />} />
+        <Route path="/licensing/reports" element={<Navigate to="/authority/licensing/reports" replace />} />
+        <Route path="/licensing/apply" element={<Navigate to="/operator/licensing/apply" replace />} />
+        <Route path="/licensing/tracker" element={<Navigate to="/operator/licensing/tracker" replace />} />
+        <Route path="/licensing/vault" element={<Navigate to="/operator/licensing/vault" replace />} />
+        <Route path="/licensing/licences" element={<Navigate to="/operator/licences" replace />} />
+        <Route path="/licensing/renewals" element={<Navigate to="/operator/licensing/renewals" replace />} />
+        <Route path="/licensing/invoices" element={<Navigate to="/operator/licensing/invoices" replace />} />
+        <Route path="/licensing/appeals" element={<Navigate to="/operator/licensing/appeals" replace />} />
+        <Route path="/licensing/*" element={<Navigate to="/operator/licensing" replace />} />
 
         {only ? (
           <>

@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom'
+import { useLicensingBase } from '../mount.jsx'
 import { CalendarClock } from 'lucide-react'
 import { PageHeader } from '../../../components/layout/PortalShell.jsx'
 import DataTable from '../../../components/ui/Table.jsx'
@@ -7,6 +8,7 @@ import Button from '../../../components/ui/Button.jsx'
 import { useDb } from '../../../lib/store.jsx'
 import { dt } from '../../../lib/format.js'
 export default function Inspections() {
+  const licBase = useLicensingBase()
   const { db } = useDb()
   const nav = useNavigate()
   const rows = db.applications
@@ -41,7 +43,7 @@ export default function Inspections() {
             sortable: false,
             align: 'right',
             render: (r) => (
-              <Button size="xs" variant="subtle" onClick={() => nav(`/licensing/application/${r.id}`)}>
+              <Button size="xs" variant="subtle" onClick={() => nav(`${licBase}/application/${r.id}`)}>
                 Open
               </Button>
             ),

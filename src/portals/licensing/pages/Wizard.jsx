@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react'
+import { useLicensingBase } from '../mount.jsx'
 import { useTx } from '../../../lib/adminLang.js'
 import { useNavigate } from 'react-router-dom'
 import { Bus, Check, FileText, IdCard, Route as RouteIcon, ShieldCheck, Upload, Users } from 'lucide-react'
@@ -24,6 +25,7 @@ const ICONS = {
 }
 const STEPS = ['Licence type', 'Details', 'Documents', 'Review & submit']
 export default function Wizard() {
+  const licBase = useLicensingBase()
   const tx = useTx()
   const { db, update, audit, notify } = useDb()
   const [ses] = useSession('licensing')
@@ -117,7 +119,7 @@ export default function Wizard() {
     })
     notify({ audience: 'authority', title: 'New application submitted', body: `${op.name} filed ${lt.label} (${id}).` })
     toast({ title: 'Application submitted', body: `Invoice ${invoiceId} for ${MMK(fee)} has been issued.` })
-    nav(`/licensing/application/${id}`)
+    nav(`${licBase}/application/${id}`)
   }
   return (
     <>

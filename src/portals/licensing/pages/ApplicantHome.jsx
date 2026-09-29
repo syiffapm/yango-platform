@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { useLicensingBase } from '../mount.jsx'
 import { BadgeCheck, FilePlus2, Receipt, Stamp, AlertTriangle } from 'lucide-react'
 import { PageHeader } from '../../../components/layout/PortalShell.jsx'
 import { Card, CardBody, CardHeader } from '../../../components/ui/Card.jsx'
@@ -11,6 +12,7 @@ import { useSession } from '../../../lib/session.jsx'
 import { MMK, dateOnly, daysUntil, relative } from '../../../lib/format.js'
 import { operators } from '../../../data/org.js'
 export default function ApplicantHome() {
+  const licBase = useLicensingBase()
   const { db } = useDb()
   const [ses] = useSession('licensing')
   const op = operators.find((o) => o.id === ses.operator)
@@ -31,7 +33,7 @@ export default function ApplicantHome() {
           </>
         }
         actions={
-          <Button variant="primary" icon={FilePlus2} as={Link} to="/licensing/apply">
+          <Button variant="primary" icon={FilePlus2} as={Link} to={`${licBase}/apply`}>
             New application
           </Button>
         }
@@ -69,7 +71,7 @@ export default function ApplicantHome() {
             title="Applications in progress"
             icon={Stamp}
             action={
-              <Button size="xs" as={Link} to="/licensing/tracker">
+              <Button size="xs" as={Link} to={`${licBase}/tracker`}>
                 Open tracker
               </Button>
             }
@@ -81,7 +83,7 @@ export default function ApplicantHome() {
               .map((a) => (
                 <Link
                   key={a.id}
-                  to={`/licensing/application/${a.id}`}
+                  to={`${licBase}/application/${a.id}`}
                   className="flex items-center gap-3 rounded-lg border border-ink-200 px-3 py-2.5 hover:border-brand-300"
                 >
                   <div className="flex-1 min-w-0">
@@ -110,7 +112,7 @@ export default function ApplicantHome() {
             title="Expiring licences"
             icon={AlertTriangle}
             action={
-              <Button size="xs" as={Link} to="/licensing/renewals">
+              <Button size="xs" as={Link} to={`${licBase}/renewals`}>
                 Renew
               </Button>
             }
@@ -146,7 +148,7 @@ export default function ApplicantHome() {
             title="Unpaid invoices"
             icon={Receipt}
             action={
-              <Button size="xs" as={Link} to="/licensing/invoices">
+              <Button size="xs" as={Link} to={`${licBase}/invoices`}>
                 All invoices
               </Button>
             }
@@ -159,7 +161,7 @@ export default function ApplicantHome() {
                   {db.applications.find((a) => a.invoiceId === i.id)?.typeLabel || i.kind}
                 </span>
                 <span className="text-[13px] font-medium">{MMK(i.amount)}</span>
-                <Button size="xs" variant="primary" as={Link} to={`/licensing/application/${i.ref}`}>
+                <Button size="xs" variant="primary" as={Link} to={`${licBase}/application/${i.ref}`}>
                   Pay
                 </Button>
               </div>

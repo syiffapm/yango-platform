@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useLicensingBase } from '../mount.jsx'
 import { useTx } from '../../../lib/adminLang.js'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import {
@@ -43,6 +44,7 @@ const stepOf = (a) => {
   return 0
 }
 export default function ApplicationDetail() {
+  const licBase = useLicensingBase()
   const tx = useTx()
   const { id } = useParams()
   const nav = useNavigate()
@@ -59,7 +61,7 @@ export default function ApplicationDetail() {
       <Empty
         title="Application not found"
         action={
-          <Button as={Link} to="/licensing/queue">
+          <Button as={Link} to={`${licBase}/queue`}>
             Back to queue
           </Button>
         }

@@ -6,6 +6,10 @@ import {
   Bus,
   CalendarDays,
   ClipboardList,
+  FilePlus2,
+  FolderOpen,
+  Gavel,
+  Stamp,
   Coins,
   FileBarChart,
   Home,
@@ -29,10 +33,20 @@ import PortalShell, { IdentityMenu } from '../../components/layout/PortalShell.j
 import { useSession } from '../../lib/session.jsx'
 import { useDb, openIncidents } from '../../lib/store.jsx'
 import { operators } from '../../data/org.js'
+import { daysUntil } from '../../lib/format.js'
 import Dashboard from './pages/Dashboard.jsx'
 import Company from './pages/Company.jsx'
 import UsersRoles from './pages/UsersRoles.jsx'
 import Licences from './pages/Licences.jsx'
+import { AsApplicant } from '../licensing/mount.jsx'
+import ApplicantHome from '../licensing/pages/ApplicantHome.jsx'
+import Wizard from '../licensing/pages/Wizard.jsx'
+import ApplicationTracker from '../licensing/pages/OfficerQueue.jsx'
+import ApplicationDetail from '../licensing/pages/ApplicationDetail.jsx'
+import DocumentVault from '../licensing/pages/DocumentVault.jsx'
+import Renewals from '../licensing/pages/Renewals.jsx'
+import Invoices from '../licensing/pages/Invoices.jsx'
+import Appeals from '../licensing/pages/Appeals.jsx'
 import Fleet from './pages/Fleet.jsx'
 import VehicleDetail from './pages/VehicleDetail.jsx'
 import Maintenance from './pages/Maintenance.jsx'
@@ -62,6 +76,15 @@ export default function OperatorPortal() {
   const openFindings = db.findings.filter(
     (f) => f.operator === op.id && ['issued', 'disputed'].includes(f.status),
   ).length
+  // The company's own licensing workload, for the nav badges.
+  const myApps = db.applications.filter((a) => a.operator === op.id)
+  const licCounts = {
+    mine: myApps.filter((a) => !['approved', 'rejected', 'withdrawn'].includes(a.state)).length,
+    renewals: db.permits.filter((p) => p.operator === op.id && daysUntil(p.expiry) <= 90 && daysUntil(p.expiry) > 0)
+      .length,
+    unpaid: myApps.filter((a) => a.state === 'awaiting_payment').length,
+  }
+
   const nav = [
     {
       label: 'Overview',
@@ -108,16 +131,29 @@ export default function OperatorPortal() {
       ],
     },
     {
+      label: 'Licensing',
+      items: [
+        { to: '/operator/licensing', icon: ClipboardList, label: 'Licensing dashboard', end: true },
+        { to: '/operator/licensing/apply', icon: FilePlus2, label: 'New application' },
+        { to: '/operator/licensing/tracker', icon: ClipboardList, label: 'Application tracker', badge: licCounts.mine },
+        { to: '/operator/licensing/vault', icon: FolderOpen, label: 'Document vault' },
+        { to: '/operator/licences', icon: ScrollText, label: 'My licences' },
+        { to: '/operator/licensing/renewals', icon: Stamp, label: 'Renewals', badge: licCounts.renewals },
+        { to: '/operator/licensing/invoices', icon: Receipt, label: 'Invoices & receipts', badge: licCounts.unpaid },
+        { to: '/operator/licensing/appeals', icon: Gavel, label: 'Appeals' },
+      ],
+    },
+    {
       label: 'Company',
       items: [
         { to: '/operator/company', icon: Building2, label: 'Company profile' },
         { to: '/operator/users', icon: Users, label: 'Users & roles' },
-        { to: '/operator/licences', icon: ScrollText, label: 'Licences' },
         { to: '/operator/api', icon: KeyRound, label: 'API & webhooks' },
         { to: '/operator/audit', icon: LifeBuoy, label: 'Help & audit' },
       ],
     },
   ]
+
   const myUsers = db.poUsers.filter((u) => u.operator === op.id)
   const me = myUsers.find((u) => u.id === ses.userId) || myUsers[0]
   return (
@@ -178,6 +214,70 @@ export default function OperatorPortal() {
         <Route path="company" element={<Company />} />
         <Route path="users" element={<UsersRoles />} />
         <Route path="licences" element={<Licences />} />
+        <Route
+          path="licensing"
+          element={
+            <AsApplicant>
+              <ApplicantHome />
+            </AsApplicant>
+          }
+        />
+        <Route
+          path="licensing/apply"
+          element={
+            <AsApplicant>
+              <Wizard />
+            </AsApplicant>
+          }
+        />
+        <Route
+          path="licensing/tracker"
+          element={
+            <AsApplicant>
+              <ApplicationTracker applicantMode />
+            </AsApplicant>
+          }
+        />
+        <Route
+          path="licensing/application/:id"
+          element={
+            <AsApplicant>
+              <ApplicationDetail />
+            </AsApplicant>
+          }
+        />
+        <Route
+          path="licensing/vault"
+          element={
+            <AsApplicant>
+              <DocumentVault />
+            </AsApplicant>
+          }
+        />
+        <Route
+          path="licensing/renewals"
+          element={
+            <AsApplicant>
+              <Renewals />
+            </AsApplicant>
+          }
+        />
+        <Route
+          path="licensing/invoices"
+          element={
+            <AsApplicant>
+              <Invoices />
+            </AsApplicant>
+          }
+        />
+        <Route
+          path="licensing/appeals"
+          element={
+            <AsApplicant>
+              <Appeals />
+            </AsApplicant>
+          }
+        />
         <Route path="api" element={<ApiKeys />} />
         <Route path="audit" element={<AuditLog />} />
         <Route path="*" element={<Navigate to="/operator/home" replace />} />

@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom'
+import { useLicensingBase } from '../mount.jsx'
 import { Inbox, UserPlus } from 'lucide-react'
 import { PageHeader } from '../../../components/layout/PortalShell.jsx'
 import DataTable from '../../../components/ui/Table.jsx'
@@ -12,6 +13,7 @@ import { countdown, dt, MMK, relative } from '../../../lib/format.js'
 import { licenceTypes } from '../../../data/org.js'
 const OPEN_STATES = ['submitted', 'awaiting_payment', 'in_review', 'inspection', 'awaiting_approval', 'revision']
 export default function OfficerQueue({ applicantMode }) {
+  const licBase = useLicensingBase()
   const { db, update, audit } = useDb()
   const [ses] = useSession('licensing')
   const nav = useNavigate()
@@ -113,7 +115,7 @@ export default function OfficerQueue({ applicantMode }) {
             variant="subtle"
             onClick={(e) => {
               e.stopPropagation()
-              nav(`/licensing/application/${r.id}`)
+              nav(`${licBase}/application/${r.id}`)
             }}
           >
             Open
@@ -164,7 +166,7 @@ export default function OfficerQueue({ applicantMode }) {
         rows={rows}
         exportName="licensing-queue"
         searchKeys={['id', 'typeName', 'applicantName', 'note']}
-        onRowClick={(r) => nav(`/licensing/application/${r.id}`)}
+        onRowClick={(r) => nav(`${licBase}/application/${r.id}`)}
         filters={[
           {
             key: 'state',

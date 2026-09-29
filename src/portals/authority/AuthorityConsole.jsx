@@ -2,6 +2,8 @@ import { Navigate, Route, Routes } from 'react-router-dom'
 import {
   Activity,
   BadgeCheck,
+  Inbox,
+  Wrench,
   Banknote,
   BarChart3,
   Bell,
@@ -50,6 +52,13 @@ import Revenue from './pages/Revenue.jsx'
 import Settlement from './pages/Settlement.jsx'
 import Registries from './pages/Registries.jsx'
 import CmsOverview from '../terminal/pages/CmsDashboard.jsx'
+import { AsOfficer } from '../licensing/mount.jsx'
+import OfficerQueue from '../licensing/pages/OfficerQueue.jsx'
+import ApplicationDetail from '../licensing/pages/ApplicationDetail.jsx'
+import Inspections from '../licensing/pages/Inspections.jsx'
+import LicenceRegister from '../licensing/pages/Register.jsx'
+import FeeSchedule from '../licensing/pages/FeeSchedule.jsx'
+import LicensingReports from '../licensing/pages/LicensingReports.jsx'
 import Enforcement from './pages/Enforcement.jsx'
 import NationalDashboard from './pages/NationalDashboard.jsx'
 import RegionalDashboard from './pages/RegionalDashboard.jsx'
@@ -129,6 +138,11 @@ export default function AuthorityConsole() {
       label: 'Licensing & money',
       items: [
         { to: '/authority/licensing', icon: ClipboardList, label: 'Licensing overview', badge: pendingApps },
+        { to: '/authority/licensing/queue', icon: Inbox, label: 'Approval work queue', badge: pendingApps },
+        { to: '/authority/licensing/inspections', icon: Wrench, label: 'Inspections' },
+        { to: '/authority/licensing/register', icon: BadgeCheck, label: 'Licence register' },
+        { to: '/authority/licensing/fees', icon: Coins, label: 'Fee schedule' },
+        { to: '/authority/licensing/reports', icon: FileBarChart, label: 'Licensing reports' },
         { to: '/authority/permits', icon: ScrollText, label: 'Permit register' },
         { to: '/authority/revenue', icon: Banknote, label: 'Regulated revenue' },
         { to: '/authority/settlement', icon: Landmark, label: 'Settlement oversight' },
@@ -249,6 +263,54 @@ export default function AuthorityConsole() {
         <Route path="settlement" element={<Settlement />} />
         <Route path="registries" element={<Registries />} />
         <Route path="cms" element={<CmsOverview />} />
+        <Route
+          path="licensing/queue"
+          element={
+            <AsOfficer>
+              <OfficerQueue />
+            </AsOfficer>
+          }
+        />
+        <Route
+          path="licensing/application/:id"
+          element={
+            <AsOfficer>
+              <ApplicationDetail />
+            </AsOfficer>
+          }
+        />
+        <Route
+          path="licensing/inspections"
+          element={
+            <AsOfficer>
+              <Inspections />
+            </AsOfficer>
+          }
+        />
+        <Route
+          path="licensing/register"
+          element={
+            <AsOfficer>
+              <LicenceRegister />
+            </AsOfficer>
+          }
+        />
+        <Route
+          path="licensing/fees"
+          element={
+            <AsOfficer>
+              <FeeSchedule />
+            </AsOfficer>
+          }
+        />
+        <Route
+          path="licensing/reports"
+          element={
+            <AsOfficer>
+              <LicensingReports />
+            </AsOfficer>
+          }
+        />
         <Route path="approvals" element={<Approvals />} />
         <Route path="complaints" element={<Complaints />} />
         <Route path="accounts" element={<Accounts />} />
